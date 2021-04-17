@@ -14,9 +14,33 @@ namespace Tesis_Blockchain_VoteSystem
     {
         public Login()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Votacion Votacion = new Votacion();
+            this.Hide();
+            Votacion.ShowDialog();
+            this.Show();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RevisiondeVotos VerVotos = new RevisiondeVotos();
+            this.Hide();
+            VerVotos.ShowDialog();
+            this.Show();
+        }
+
+        private void onfocus_txtRut(object sender, EventArgs e)
+        {
+            txtRut.ResetText();            
+        }
+        private void onfocus_txtPass(object sender, EventArgs e)
+        {
+            txtPass.ResetText();
+            txtPass.UseSystemPasswordChar= true;
+        }
     }
 }
