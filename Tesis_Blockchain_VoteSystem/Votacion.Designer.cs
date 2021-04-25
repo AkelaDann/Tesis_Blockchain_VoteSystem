@@ -44,6 +44,7 @@ namespace Tesis_Blockchain_VoteSystem
             BtnSI.TabIndex = 1;
             BtnSI.Text = "Si";
             BtnSI.UseVisualStyleBackColor = true;
+            BtnSI.Click += new System.EventHandler(this.BtnSI_Click);
             // 
             // label1
             // 
@@ -63,6 +64,7 @@ namespace Tesis_Blockchain_VoteSystem
             this.btnNO.TabIndex = 2;
             this.btnNO.Text = "No";
             this.btnNO.UseVisualStyleBackColor = true;
+            this.btnNO.Click += new System.EventHandler(this.btnNO_Click);
             // 
             // linkLabel1
             // 

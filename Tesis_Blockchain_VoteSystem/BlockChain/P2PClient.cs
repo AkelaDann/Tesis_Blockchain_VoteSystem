@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using WebSocketSharp;
 
-namespace BlockchainDemo
+namespace BlockchainLib
 {
     public class P2PClient
     {
@@ -24,20 +24,20 @@ namespace BlockchainDemo
                     else
                     {
                         Blockchain newChain = JsonConvert.DeserializeObject<Blockchain>(e.Data);
-                        if (newChain.IsValid() && newChain.Chain.Count > Program.PhillyCoin.Chain.Count)
+                        if (newChain.IsValid() && newChain.Chain.Count > Tesis_Blockchain_VoteSystem.Program.VoteChain.Chain.Count)
                         {
                             List<Transaction> newTransactions = new List<Transaction>();
                             newTransactions.AddRange(newChain.PendingTransactions);
-                            newTransactions.AddRange(Program.PhillyCoin.PendingTransactions);
+                            newTransactions.AddRange(Tesis_Blockchain_VoteSystem.Program.VoteChain.PendingTransactions);
 
                             newChain.PendingTransactions = newTransactions;
-                            Program.PhillyCoin = newChain;
+                            Tesis_Blockchain_VoteSystem.Program.VoteChain = newChain;
                         }
                     }
                 };
                 ws.Connect();
                 ws.Send("Hi Server");
-                ws.Send(JsonConvert.SerializeObject(Program.PhillyCoin));
+                ws.Send(JsonConvert.SerializeObject(Tesis_Blockchain_VoteSystem.Program.VoteChain));
                 wsDict.Add(url, ws);
             }
         }

@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlockchainDemo
+namespace BlockchainLib
 {
     public class Transaction
     {
-        public string FromAddress { get; set; }
-        public string ToAddress { get; set; }
-        public int Amount { get; set; }
-
-        public Transaction(string fromAddress, string toAddress, int amount)
+        public string Voto { get; set; }
+       
+        public Transaction( string voto)
         {
-            FromAddress = fromAddress;
-            ToAddress = toAddress;
-            Amount = amount;
+            Voto = voto;          
         }
     }
 }

@@ -1,19 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace BlockchainDemo
+namespace BlockchainLib
 {
     class Program
     {
         public static int Port = 0;
         public static P2PServer Server = null;
         public static P2PClient Client = new P2PClient();
-        public static Blockchain PhillyCoin = new Blockchain();
+        public static Blockchain VoteChain = new Blockchain();
         public static string name = "Unkown";
 
         static void Main(string[] args)
         {
-            PhillyCoin.InitializeChain();
+            VoteChain.InitializeChain();
 
             if (args.Length >= 1)
                 Port = int.Parse(args[0]);
@@ -53,13 +53,13 @@ namespace BlockchainDemo
                         string receiverName = Console.ReadLine();
                         Console.WriteLine("Please enter the amount");
                         string amount = Console.ReadLine();
-                        PhillyCoin.CreateTransaction(new Transaction(name, receiverName, int.Parse(amount)));
-                        PhillyCoin.ProcessPendingTransactions(name);
-                        Client.Broadcast(JsonConvert.SerializeObject(PhillyCoin));
+                        VoteChain.CreateTransaction(new Transaction(name, receiverName, int.Parse(amount)));
+                        VoteChain.ProcessPendingTransactions(name);
+                        Client.Broadcast(JsonConvert.SerializeObject(VoteChain));
                         break;
                     case 3:
                         Console.WriteLine("Blockchain");
-                        Console.WriteLine(JsonConvert.SerializeObject(PhillyCoin, Formatting.Indented));
+                        Console.WriteLine(JsonConvert.SerializeObject(VoteChain, Formatting.Indented));
                         break;
 
                 }

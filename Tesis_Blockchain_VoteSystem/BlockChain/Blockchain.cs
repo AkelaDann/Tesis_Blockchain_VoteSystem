@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlockchainDemo
+namespace BlockchainLib
 {
     public class Blockchain
     {
@@ -45,13 +45,13 @@ namespace BlockchainDemo
         {
             PendingTransactions.Add(transaction);
         }
-        public void ProcessPendingTransactions(string minerAddress)
+        public void ProcessPendingTransactions(string voto)
         {
             Block block = new Block(DateTime.Now, GetLatestBlock().Hash, PendingTransactions);
             AddBlock(block);
 
             PendingTransactions = new List<Transaction>();
-            CreateTransaction(new Transaction(null, minerAddress, Reward));
+            CreateTransaction(new Transaction( voto));
         }
 
         public void AddBlock(Block block)
@@ -59,7 +59,7 @@ namespace BlockchainDemo
             Block latestBlock = GetLatestBlock();
             block.Index = latestBlock.Index + 1;
             block.PreviousHash = latestBlock.Hash;
-            //block.Hash = block.CalculateHash();
+            block.Hash = block.CalculateHash();
             block.Mine(this.Difficulty);
             Chain.Add(block);
         }
@@ -84,29 +84,39 @@ namespace BlockchainDemo
             return true;
         }
 
-        public int GetBalance(string address)
+        public int GetBalanceSi()
         {
-            int balance = 0;
-
-            for (int i = 0; i < Chain.Count; i++)
+            int balanceSi = 0;
+            
+            for (int i = 1; i < Chain.Count; i++)
             {
-                for (int j = 0; j < Chain[i].Transactions.Count; j++)
+                var transaction = Chain[i].Transactions[0];
+
+                if (transaction.Voto == "SI")
                 {
-                    var transaction = Chain[i].Transactions[j];
-
-                    if (transaction.FromAddress == address)
-                    {
-                        balance -= transaction.Amount;
-                    }
-
-                    if (transaction.ToAddress == address)
-                    {
-                        balance += transaction.Amount;
-                    }
+                    balanceSi ++;
                 }
+                
             }
 
-            return balance;
+            return balanceSi;
+        }
+        public int GetBalanceNo()
+        {
+            int balanceNo = 0;
+
+            for (int i = 1; i < Chain.Count; i++)
+            {
+                var transaction = Chain[i].Transactions[0];
+
+                if (transaction.Voto == "NO")
+                {
+                    balanceNo++;
+                }
+
+            }
+
+            return balanceNo;
         }
     }
 }
