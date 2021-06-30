@@ -87,16 +87,16 @@ namespace BlockchainLib
         public int GetBalanceSi()
         {
             int balanceSi = 0;
-            
+
             for (int i = 1; i < Chain.Count; i++)
             {
-                var transaction = Chain[i].Transactions[0];
+                var transaction = Chain[i].Transactions[Chain[i].Transactions.Count - 1];
 
                 if (transaction.Voto == "SI")
                 {
-                    balanceSi ++;
+                    balanceSi++;
                 }
-                
+
             }
 
             return balanceSi;
@@ -104,10 +104,11 @@ namespace BlockchainLib
         public int GetBalanceNo()
         {
             int balanceNo = 0;
-
+            
+          
             for (int i = 1; i < Chain.Count; i++)
             {
-                var transaction = Chain[i].Transactions[0];
+                var transaction = Chain[i].Transactions[Chain[i].Transactions.Count-1];
 
                 if (transaction.Voto == "NO")
                 {
